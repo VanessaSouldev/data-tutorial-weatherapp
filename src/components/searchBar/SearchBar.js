@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useState} from 'react';
 import './SearchBar.css';
 
-function SearchBar() {
+function SearchBar({setLocationHandler}) {
+    const [searchQuery, setSearchQuery] = useState('');
+
+    function onFormSubmit(e) {e.preventDefault();
+        console.log('submitted');
+
+        setLocationHandler(searchQuery);
+    }
+
   return (
-    <form className="searchbar">
+    <form className="searchbar" onSubmit={onFormSubmit}>
       <input
         type="text"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
         name="search"
         placeholder="Zoek een stad in Nederland"
       />
